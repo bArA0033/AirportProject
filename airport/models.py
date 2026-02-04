@@ -25,3 +25,14 @@ class User(AbstractUser):
     date_of_employment = models.DateField(blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
 
+
+
+class AirCompany(models.Model):
+    # data
+    name = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    
+
+
