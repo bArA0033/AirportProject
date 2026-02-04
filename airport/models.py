@@ -18,13 +18,13 @@ class User(AbstractUser):
 class Employee(models.Model):
     # inner classes
     class Positions(models.TextChoices):
-        manager = 'ma', 'manager'
-        administrator = 'ad', 'administrator'
-        gate_gard = 'gg', 'gate_gard'
-        flight_crew = 'fc', 'flight_crew'
-        pilot = 'pi', 'pilot'
-        airport_employee = 'ae', 'airport_employee'
-        passenger = 'pa', 'passenger'
+        Manager = 'ma', 'manager'
+        Administrator = 'ad', 'administrator'
+        Gate_gard = 'gg', 'gate_gard'
+        Flight_crew = 'fc', 'flight_crew'
+        Pilot = 'pi', 'pilot'
+        Airport_employee = 'ae', 'airport_employee'
+        Passenger = 'pa', 'passenger'
 
     # foreign relations
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='employee_profile')
@@ -48,9 +48,9 @@ class AirCompany(models.Model):
 class Airplane(models.Model):
     # inner classes
     class Status(models.TextChoices):
-        active = 'ac', 'active'
-        under_repair = 'ur', 'under_repair'
-        retired = 're', 'retired'
+        Active = 'ac', 'active'
+        Under_repair = 'ur', 'under_repair'
+        Retired = 're', 'retired'
 
     # foreign relations
     company = models.ForeignKey(AirCompany, on_delete=models.CASCADE, related_name='airplanes')
