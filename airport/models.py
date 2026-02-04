@@ -33,6 +33,16 @@ class AirCompany(models.Model):
     city = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
-    
 
 
+class Airplane(models.Model):
+    # inner classes
+    class Status(models.TextChoices):
+        active = 'ac', 'active'
+        under_repair = 'ur', 'under_repair'
+        retired = 're', 'retired'
+    # foreign relations
+    company = models.ForeignKey(AirCompany, on_delete=models.CASCADE, related_name='airplanes')
+    # data
+    status = models.CharField(choices=Status.choices, default=Status.active)
+    capacity = models.PositiveIntegerField(default=0)
