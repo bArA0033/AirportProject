@@ -51,8 +51,10 @@ class Airplane(models.Model):
         active = 'ac', 'active'
         under_repair = 'ur', 'under_repair'
         retired = 're', 'retired'
+
     # foreign relations
     company = models.ForeignKey(AirCompany, on_delete=models.CASCADE, related_name='airplanes')
+
     # data
     status = models.CharField(choices=Status.choices, default=Status.active)
     capacity = models.PositiveIntegerField(default=0)
