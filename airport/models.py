@@ -64,13 +64,13 @@ class Flight(models.Model):
         GateOpen = 'go', 'gate_open'
         Boarding = 'bo', 'boarding'
         LastCall = 'cl', 'last_call'
-        GateClose = 'gc', 'gate_open'
-        TookOff = 'to', 'landed'
+        GateClose = 'gc', 'gate_closed'
+        TookOff = 'to', 'took_off'
         Landed = 'la', 'landed'
 
     # foreign relations
     airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')
-    pilot = models.ForeignKey(AirCompany, on_delete=models.CASCADE, related_name='flights')
+    pilot = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='flights')
     
 
     # data
