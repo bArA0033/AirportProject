@@ -24,13 +24,12 @@ class Employee(models.Model):
         Flight_crew = 'fc', 'flight_crew'
         Pilot = 'pi', 'pilot'
         Airport_employee = 'ae', 'airport_employee'
-        Passenger = 'pa', 'passenger'
 
     # foreign relations
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='employee_profile')
 
     # data
-    job_position = models.CharField(choices=Positions.choices, default=Positions.passenger, max_length=100)
+    job_position = models.CharField(choices=Positions.choices, default=Positions.Airport_employee, max_length=100)
 
     # date
     date_of_employment = models.DateField()
