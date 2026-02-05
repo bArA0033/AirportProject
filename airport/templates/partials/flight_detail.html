@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Flight Detail{% endblock %}
+{% block content %}
+    <h1>flight number {{ flight.id }}</h1>
+    <p>from {{ flight.origin }} to {{ flight.destination }}</p>
+    <p>takes of at {{ flight.take_off_time }} and lands at about {{ flight.land_time }}</p>
+    <h2>Status : {{ flight.get_status_display }}</h2>
+    <p>your pilot will be captain {{ flight.pilot }}</p>
+    <p>{{ flight.airplane.company }} wishes you a good trip with our airplane number {{ flight.airplane.id }}</p>
+{% endblock %}
+{##}
+{#   airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')#}
+{#    pilot = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='flights')#}
+{#    origin = models.CharField(max_length=100)#}
+{#    destination = models.CharField(max_length=100)#}
+{##}
+{#    # data#}
+{#    status = models.CharField(choices=Status.choices, default=Status.Waiting)#}
+{#    take_off_time = models.DateTimeField()#}
+{#    land_time = models.DateTimeField()#}

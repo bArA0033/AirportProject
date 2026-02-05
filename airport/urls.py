@@ -9,4 +9,5 @@ urlpatterns = [
     path('profile/',views.profile,name='profile'),
     path('login/', auth_views.LoginView.as_view(authentication_form=LoginForm), name='login'),
     path('logout/', views.log_out, name='logout'),
+    path('flight_detail/<pk>',views.flight_detail,name='flight_detail'),
 ]

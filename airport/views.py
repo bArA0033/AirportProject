@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 
 from airport.models import Flight
@@ -17,7 +17,7 @@ def home(request):
         'person':person,
         'logged':logged,
     }
-    return render(request,'home.html',context)
+    return render(request, 'partials/home.html', context)
 
 @login_required
 def profile(request):
@@ -36,8 +36,15 @@ def profile(request):
         'passenger':passenger,
     }
 
-    return render(request,'profile.html',context)
+    return render(request, 'partials/profile.html', context)
 
 def log_out(request):
     logout(request)
     return redirect('airport:home')
+
+def flight_detail(request, pk):
+    flight = get_object_or_404(Flight, pk=pk)
+    context = {
+        'flight':flight,
+    }
+    return render(request,'partials/flight_detail.html',context)
