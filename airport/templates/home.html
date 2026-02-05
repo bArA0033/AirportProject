@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}home{% endblock %}
+{% block content %}
+    <table>
+        {% for flight in flights %}
+          <tr>
+          <td><a href="#">{{ flight.id }}</a></td>
+          <td>{{ flight.origin }}</td>
+          <td>{{ flight.destination }}</td>
+          <td>{{ flight.take_off_time }}</td>
+          <td>{{ flight.land_time }}</td>
+          </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

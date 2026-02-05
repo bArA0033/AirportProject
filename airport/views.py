@@ -5,7 +5,8 @@ from airport.models import Flight
 
 
 def home(request):
-    pass
+    flights = Flight.objects.all()
+    return render(request,'home.html',{'flights':flights})
 
 @login_required
 def profile(request):
@@ -22,3 +23,4 @@ def profile(request):
     }
 
     return render(request,'',context)
+
