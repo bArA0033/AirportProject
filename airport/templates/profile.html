@@ -8,10 +8,20 @@
         <p>birthDay : {{ person.user.date_of_birth }}</p>
     {% endif %}
     {% if not passenger %}
-        <p>job position : {{ person.job_position }}</p>
+        <p>job position : {{ person.get_job_position_display }}</p>
     {% endif %}
+    <p><a href="{% url 'airport:logout' %}">logout</a></p>
+    <p><a href="{% url 'airport:home' %}">home</a></p>
 
     <table>
+        <tr>
+            <th><p>Flight Number</p></th>
+            <th><p>Origin</p></th>
+            <th><p>Destination</p></th>
+            <th><p>TakeOff Time</p></th>
+            <th><p>Landing Time</p></th>
+            <th><p>Status</p></th>
+        </tr>
         {% for flight in flights %}
           <tr>
           <td><a href="#">{{ flight.id }}</a></td>
@@ -19,7 +29,10 @@
           <td>{{ flight.destination }}</td>
           <td>{{ flight.take_off_time }}</td>
           <td>{{ flight.land_time }}</td>
+          <td>{{ flight.get_status_display }}</td>
           </tr>
+        {% empty %}
+            <p>No flight is scheduled</p>
         {% endfor %}
     </table>
 {% endblock %}

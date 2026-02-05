@@ -1,12 +1,23 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 
 from airport.models import Flight
 
 
 def home(request):
     flights = Flight.objects.all()
-    return render(request,'home.html',{'flights':flights})
+    logged = request.user.is_authenticated
+    if logged:
+        person = request.user
+    else:
+        person = None
+    context = {
+        'flights':flights,
+        'person':person,
+        'logged':logged,
+    }
+    return render(request,'home.html',context)
 
 @login_required
 def profile(request):
@@ -27,3 +38,6 @@ def profile(request):
 
     return render(request,'profile.html',context)
 
+def log_out(request):
+    logout(request)
+    return redirect('airport:home')

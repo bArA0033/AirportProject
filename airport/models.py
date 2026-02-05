@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 def profile_upload_to(instance, filename):
     return f'profile_pics/{instance.username}/{filename}'
 
+
 class User(AbstractUser):
     # data
     phone_number = models.CharField(max_length=11)
@@ -25,14 +26,14 @@ class Employee(models.Model):
         Airport_employee = 'ae', 'airport_employee'
 
     # foreign relations
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='employee')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee')
 
     # data
-    job_position = models.CharField(choices=Positions.choices, default=Positions.Airport_employee, max_length=100)
+    job_position = models.CharField(choices=Positions.choices, default=Positions.Airport_employee
+                                    , max_length=100)
 
     # date
-    date_of_employment = models.DateField()
-
+    date_of_employment = models.DateField(auto_now_add=True)
 
 
 class AirCompany(models.Model):
@@ -57,6 +58,7 @@ class Airplane(models.Model):
     status = models.CharField(choices=Status.choices, default=Status.Active)
     capacity = models.PositiveIntegerField(default=0)
 
+
 class Flight(models.Model):
     # inner classes
     class Status(models.TextChoices):
@@ -76,10 +78,11 @@ class Flight(models.Model):
 
     # data
     status = models.CharField(choices=Status.choices, default=Status.Waiting)
-    take_off_time = models.TimeField()
+    take_off_time = models.DateTimeField()
     land_time = models.DateTimeField()
+
 
 class Passenger(models.Model):
     # foreign relations
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='passenger')
-    flights = models.ManyToManyField(Flight,related_name='passengers',blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passenger')
+    flights = models.ManyToManyField(Flight, related_name='passengers', blank=True)

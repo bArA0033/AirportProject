@@ -117,6 +117,9 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'airport.User'
 
+LOGIN_REDIRECT_URL = '/profile'
+LOGIN_URL = '/login/'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
