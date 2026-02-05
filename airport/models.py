@@ -71,7 +71,8 @@ class Flight(models.Model):
     # foreign relations
     airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')
     pilot = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='flights')
-    
+    origin = models.CharField(max_length=100)
+    destination = models.CharField(max_length=100)
 
     # data
     status = models.CharField(choices=Status.choices, default=Status.Waiting)
