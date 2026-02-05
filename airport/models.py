@@ -56,7 +56,7 @@ class Airplane(models.Model):
     company = models.ForeignKey(AirCompany, on_delete=models.CASCADE, related_name='airplanes')
 
     # data
-    status = models.CharField(choices=Status.choices, default=Status.active)
+    status = models.CharField(choices=Status.choices, default=Status.Active)
     capacity = models.PositiveIntegerField(default=0)
 
 class Flight(models.Model):
