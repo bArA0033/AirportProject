@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}Flight Detail{% endblock %}
 {% block content %}
+    <p><a href="{% url 'airport:home' %}">go to home</a></p>
     <h1>flight number {{ flight.id }}</h1>
     <p>from {{ flight.origin }} to {{ flight.destination }}</p>
     <p>takes of at {{ flight.take_off_time }} and lands at about {{ flight.land_time }}</p>
     <h2>Status : {{ flight.get_status_display }}</h2>
     <p>your pilot will be captain {{ flight.pilot }}</p>
     <p>{{ flight.airplane.company.name }} wishes you a good trip with our airplane number {{ flight.airplane.id }}</p>
+
+    {% if manager %}
+        <button><a href="{% url 'airport:update_flight' flight.id %}">Edit Flight</a></button>
+        <button><a href="{% url 'airport:create_flight' %}">Creat New Flight</a></button>
+        <button><a href="{% url 'airport:delete_flight' flight.id %}">Delete Flight</a></button>
+    {% endif %}
 {% endblock %}
 {##}
 {#   airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')#}

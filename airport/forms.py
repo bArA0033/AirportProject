@@ -7,8 +7,9 @@ from airport.models import Flight
 
 
 class FlightForm(forms.ModelForm):
-    model = Flight
-    fields = '__all__'
+    class Meta:
+        model = Flight
+        fields = ['airplane', 'pilot', 'origin', 'destination', 'status', 'take_off_time', 'land_time']
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))

@@ -35,6 +35,9 @@ class Employee(models.Model):
     # date
     date_of_employment = models.DateField(auto_now_add=True)
 
+    # over writen methods
+    def __str__(self):
+        return self.user.username
 
 class AirCompany(models.Model):
     # data
@@ -42,6 +45,11 @@ class AirCompany(models.Model):
     city = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
+
+    # over writen methods
+    def __str__(self):
+        return self.name
+
 
 
 class Airplane(models.Model):
@@ -58,6 +66,10 @@ class Airplane(models.Model):
     status = models.CharField(choices=Status.choices, default=Status.Active)
     capacity = models.PositiveIntegerField(default=0)
 
+    # over writen methods
+    def __str__(self):
+        return f"{self.id} of {self.company.name}"
+
 
 class Flight(models.Model):
     # inner classes
@@ -73,16 +85,24 @@ class Flight(models.Model):
     # foreign relations
     airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')
     pilot = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='flights')
-    origin = models.CharField(max_length=100)
-    destination = models.CharField(max_length=100)
 
     # data
+    origin = models.CharField(max_length=100)
+    destination = models.CharField(max_length=100)
     status = models.CharField(choices=Status.choices, default=Status.Waiting)
     take_off_time = models.DateTimeField()
     land_time = models.DateTimeField()
+
+    # over writen methods
+    def __str__(self):
+        return f'{self.id}'
 
 
 class Passenger(models.Model):
     # foreign relations
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passenger')
     flights = models.ManyToManyField(Flight, related_name='passengers', blank=True)
+
+    # over writen methods
+    def __str__(self):
+        return self.user.username
