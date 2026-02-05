@@ -25,7 +25,7 @@ class Employee(models.Model):
         Airport_employee = 'ae', 'airport_employee'
 
     # foreign relations
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='employee_profile')
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='employee')
 
     # data
     job_position = models.CharField(choices=Positions.choices, default=Positions.Airport_employee, max_length=100)
@@ -80,5 +80,5 @@ class Flight(models.Model):
 
 class Passenger(models.Model):
     # foreign relations
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='passenger_profile')
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='passenger')
     flights = models.ManyToManyField(Flight,related_name='passengers',blank=True)
