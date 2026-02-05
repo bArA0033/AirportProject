@@ -24,7 +24,7 @@
         </tr>
         {% for flight in flights %}
           <tr>
-          <td><a href="#">{{ flight.id }}</a></td>
+          <td><a href="{% url 'airport:flight_detail' flight.id %}">{{ flight.id }}</a></td>
           <td>{{ flight.origin }}</td>
           <td>{{ flight.destination }}</td>
           <td>{{ flight.take_off_time }}</td>
