@@ -58,3 +58,24 @@ class Airplane(models.Model):
     # data
     status = models.CharField(choices=Status.choices, default=Status.active)
     capacity = models.PositiveIntegerField(default=0)
+
+class Flight(models.Model):
+    # inner classes
+    class Status(models.TextChoices):
+        Waiting = 'wa', 'waiting'
+        GateOpen = 'go', 'gate_open'
+        Boarding = 'bo', 'boarding'
+        LastCall = 'cl', 'last_call'
+        GateClose = 'gc', 'gate_open'
+        TookOff = 'to', 'landed'
+        Landed = 'la', 'landed'
+
+    # foreign relations
+    airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')
+    pilot = models.ForeignKey(AirCompany, on_delete=models.CASCADE, related_name='flights')
+    
+
+    # data
+    status = models.CharField(choices=Status.choices, default=Status.Waiting)
+    take_off_time = models.TimeField()
+    land_time = models.DateTimeField()
