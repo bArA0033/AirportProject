@@ -13,14 +13,17 @@ def profile(request):
     if request.user.employee:
         flights = Flight.objects.filter(pilot=request.user.employee)
         person = request.user.employee
+        passenger = False
     else:
         flights = Flight.objects.filter(passengers=request.user.passenger)
         person = request.user.passenger
+        passenger = True
 
     context = {
         'flights':flights,
         'person':person,
+        'passenger':passenger,
     }
 
-    return render(request,'',context)
+    return render(request,'profile.html',context)
 

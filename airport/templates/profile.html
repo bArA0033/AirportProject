@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}profile{% endblock %}
+{% block content %}
+    <h1>{{ person.user.first_name }} {{ person.user.last_name }}</h1>
+    <img src="{% static 'images/profile_pic_default/images.jpg' %}" alt="default profile picture">
+    {% if person.user.date_of_birth %}
+        <p>birthDay : {{ person.user.date_of_birth }}</p>
+    {% endif %}
+    {% if not passenger %}
+        <p>job position : {{ person.job_position }}</p>
+    {% endif %}
+
+    <table>
+        {% for flight in flights %}
+          <tr>
+          <td><a href="#">{{ flight.id }}</a></td>
+          <td>{{ flight.origin }}</td>
+          <td>{{ flight.destination }}</td>
+          <td>{{ flight.take_off_time }}</td>
+          <td>{{ flight.land_time }}</td>
+          </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
