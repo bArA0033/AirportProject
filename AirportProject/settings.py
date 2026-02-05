@@ -76,8 +76,11 @@ WSGI_APPLICATION = 'AirportProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'airport',
+        'USER': 'afraa',
+        'PASSWORD': '1234',
+        'PORT': '5432',
     }
 }
 
