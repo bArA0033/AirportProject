@@ -77,3 +77,8 @@ class Flight(models.Model):
     status = models.CharField(choices=Status.choices, default=Status.Waiting)
     take_off_time = models.TimeField()
     land_time = models.DateTimeField()
+
+class Passenger(models.Model):
+    # foreign relations
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='passenger_profile')
+    flights = models.ManyToManyField(Flight,related_name='passengers',blank=True)
