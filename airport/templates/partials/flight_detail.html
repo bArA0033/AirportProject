@@ -6,7 +6,7 @@
     <p>takes of at {{ flight.take_off_time }} and lands at about {{ flight.land_time }}</p>
     <h2>Status : {{ flight.get_status_display }}</h2>
     <p>your pilot will be captain {{ flight.pilot }}</p>
-    <p>{{ flight.airplane.company }} wishes you a good trip with our airplane number {{ flight.airplane.id }}</p>
+    <p>{{ flight.airplane.company.name }} wishes you a good trip with our airplane number {{ flight.airplane.id }}</p>
 {% endblock %}
 {##}
 {#   airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')#}
