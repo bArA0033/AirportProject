@@ -8,7 +8,6 @@ def profile_upload_to(instance, filename):
 class User(AbstractUser):
     # data
     phone_number = models.CharField(max_length=11)
-    email = models.EmailField(blank=True)
     profile_pic = models.ImageField(upload_to=profile_upload_to, blank=True, null=True)
 
     # dates
