@@ -1,27 +1,48 @@
 {% extends 'base.html' %}
 {% block title %}Flight Detail{% endblock %}
+{% block body_class %}flight-detail-page{% endblock %}
 {% block content %}
-    <p><a href="{% url 'airport:home' %}">go to home</a></p>
-    <h1>flight number {{ flight.id }}</h1>
-    <p>from {{ flight.origin }} to {{ flight.destination }}</p>
-    <p>takes of at {{ flight.take_off_time }} and lands at about {{ flight.land_time }}</p>
-    <h2>Status : {{ flight.get_status_display }}</h2>
-    <p>your pilot will be captain {{ flight.pilot }}</p>
-    <p>{{ flight.airplane.company.name }} wishes you a good trip with our airplane number {{ flight.airplane.id }}</p>
+<div class="flight-detail">
 
-    {% if manager %}
-        <button><a href="{% url 'airport:update_flight' flight.id %}">Edit Flight</a></button>
-        <button><a href="{% url 'airport:create_flight' %}">Creat New Flight</a></button>
-        <button><a href="{% url 'airport:delete_flight' flight.id %}">Delete Flight</a></button>
-    {% endif %}
+    <a href="{% url 'airport:home' %}" class="back-link">← Back to Home</a>
+
+    <div class="flight-card">
+
+        <h1>Flight {{ flight.id }}</h1>
+
+        <p class="route">
+            {{ flight.origin }} → {{ flight.destination }}
+        </p>
+
+        <div class="flight-times">
+            <p><strong>Takeoff:</strong> {{ flight.take_off_time }}</p>
+            <p><strong>Landing:</strong> {{ flight.land_time }}</p>
+        </div>
+
+        <h2 class="status">
+            Status: {{ flight.get_status_display }}
+        </h2>
+
+        <div class="flight-info">
+            <p><strong>Pilot:</strong> Captain {{ flight.pilot }}</p>
+            <p>
+                {{ flight.airplane.company.name }}
+                welcomes you aboard aircraft
+                <strong>#{{ flight.airplane.id }}</strong>
+            </p>
+        </div>
+
+        {% if manager %}
+        <div class="flight-actions">
+            <a href="{% url 'airport:update_flight' flight.id %}">Edit Flight</a>
+            <a href="{% url 'airport:create_flight' %}">Create New Flight</a>
+            <a href="{% url 'airport:delete_flight' flight.id %}" class="danger">
+                Delete Flight
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
 {% endblock %}
-{##}
-{#   airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE, related_name='flights')#}
-{#    pilot = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='flights')#}
-{#    origin = models.CharField(max_length=100)#}
-{#    destination = models.CharField(max_length=100)#}
-{##}
-{#    # data#}
-{#    status = models.CharField(choices=Status.choices, default=Status.Waiting)#}
-{#    take_off_time = models.DateTimeField()#}
-{#    land_time = models.DateTimeField()#}

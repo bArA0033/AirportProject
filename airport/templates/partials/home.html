@@ -1,33 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}home{% endblock %}
+{% block body_class %}home-page{% endblock %}
 {% block content %}
-    <h1>Welcome</h1>
-    {% if not logged %}
-    <p><a href="{% url 'airport:login' %}">login</a></p>
-    {% else %}
-        <p><a href="{% url 'airport:profile' %}">{{ person.username }}</a></p>
-    {% endif %}
-    <h2>Our Flight Board</h2>
-    <table>
-        <tr>
-            <th><p>Flight Number</p></th>
-            <th><p>Origin</p></th>
-            <th><p>Destination</p></th>
-            <th><p>TakeOff Time</p></th>
-            <th><p>Landing Time</p></th>
-            <th><p>Status</p></th>
-        </tr>
-        {% for flight in flights %}
-          <tr>
-          <td><a href="{% url 'airport:flight_detail' flight.id %}">{{ flight.id }}</a></td>
-          <td>{{ flight.origin }}</td>
-          <td>{{ flight.destination }}</td>
-          <td>{{ flight.take_off_time }}</td>
-          <td>{{ flight.land_time }}</td>
-          <td>{{ flight.get_status_display }}</td>
-          </tr>
-        {% empty %}
-            <p>No flight is scheduled</p>
-        {% endfor %}
-    </table>
+    <div class="home">
+        <h1>Welcome</h1>
+        {% if not logged %}
+            <p><a href="{% url 'airport:login' %}">login</a></p>
+        {% else %}
+            <p><a href="{% url 'airport:profile' %}">{{ person.username }}</a></p>
+        {% endif %}
+        <h2>Our Flight Board</h2>
+        <table>
+            <tr>
+                <th><p>Flight Number</p></th>
+                <th><p>Origin</p></th>
+                <th><p>Destination</p></th>
+                <th><p>TakeOff Time</p></th>
+                <th><p>Landing Time</p></th>
+                <th><p>Status</p></th>
+            </tr>
+            {% for flight in flights %}
+                <tr>
+                    <td><a href="{% url 'airport:flight_detail' flight.id %}">{{ flight.id }}</a></td>
+                    <td>{{ flight.origin }}</td>
+                    <td>{{ flight.destination }}</td>
+                    <td>{{ flight.take_off_time }}</td>
+                    <td>{{ flight.land_time }}</td>
+                    <td>{{ flight.get_status_display }}</td>
+                </tr>
+            {% empty %}
+                <p>No flight is scheduled</p>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

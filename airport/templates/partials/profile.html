@@ -1,38 +1,68 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}profile{% endblock %}
+{% block body_class %}profile-page{% endblock %}
 {% block content %}
-    <h1>{{ person.user.first_name }} {{ person.user.last_name }}</h1>
-    <img src="{% static 'images/profile_pic_default/images.jpg' %}" alt="default profile picture">
-    {% if person.user.date_of_birth %}
-        <p>birthDay : {{ person.user.date_of_birth }}</p>
-    {% endif %}
-    {% if not passenger %}
-        <p>job position : {{ person.get_job_position_display }}</p>
-    {% endif %}
-    <p><a href="{% url 'airport:logout' %}">logout</a></p>
-    <p><a href="{% url 'airport:home' %}">home</a></p>
+<div class="profile">
 
-    <table>
+    <div class="profile-header">
+        <img
+            src="{% static 'images/profile_pic_default/images.jpg' %}"
+            alt="default profile picture"
+            class="profile-avatar"
+        />
+
+        <div>
+            <h1>{{ person.user.first_name }} {{ person.user.last_name }}</h1>
+
+            {% if person.user.date_of_birth %}
+                <p class="meta">Birthday: {{ person.user.date_of_birth }}</p>
+            {% endif %}
+
+            {% if not passenger %}
+                <p class="meta">
+                    Job position: {{ person.get_job_position_display }}
+                </p>
+            {% endif %}
+
+            <div class="profile-actions">
+                <a href="{% url 'airport:logout' %}">Logout</a>
+                <a href="{% url 'airport:home' %}">Home</a>
+            </div>
+        </div>
+    </div>
+
+    <h2>Your Flights</h2>
+
+    <table class="profile-table">
         <tr>
-            <th><p>Flight Number</p></th>
-            <th><p>Origin</p></th>
-            <th><p>Destination</p></th>
-            <th><p>TakeOff Time</p></th>
-            <th><p>Landing Time</p></th>
-            <th><p>Status</p></th>
+            <th>Flight Number</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>TakeOff Time</th>
+            <th>Landing Time</th>
+            <th>Status</th>
         </tr>
+
         {% for flight in flights %}
-          <tr>
-          <td><a href="{% url 'airport:flight_detail' flight.id %}">{{ flight.id }}</a></td>
-          <td>{{ flight.origin }}</td>
-          <td>{{ flight.destination }}</td>
-          <td>{{ flight.take_off_time }}</td>
-          <td>{{ flight.land_time }}</td>
-          <td>{{ flight.get_status_display }}</td>
-          </tr>
+        <tr>
+            <td>
+                <a href="{% url 'airport:flight_detail' flight.id %}">
+                    {{ flight.id }}
+                </a>
+            </td>
+            <td>{{ flight.origin }}</td>
+            <td>{{ flight.destination }}</td>
+            <td>{{ flight.take_off_time }}</td>
+            <td>{{ flight.land_time }}</td>
+            <td>{{ flight.get_status_display }}</td>
+        </tr>
         {% empty %}
-            <p>No flight is scheduled</p>
+        <tr>
+            <td colspan="6" class="empty">No flight is scheduled</td>
+        </tr>
         {% endfor %}
     </table>
+
+</div>
 {% endblock %}
